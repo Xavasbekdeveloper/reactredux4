@@ -1,0 +1,33 @@
+.header {
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 9;
+    background-color: #fff;
+    box-shadow: 0 0 1px 1px #7e7e7ea6;
+
+    &__container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__logo {
+        font-size: 30px;
+        font-weight: 700;
+        color: #7e7e7e;
+    }
+
+    &__list {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    &__link {
+        font-size: 18px;
+        font-weight: 500;
+        color: #7e7e7e;
+    }
+}
