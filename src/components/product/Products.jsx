@@ -15,7 +15,9 @@ const Products = ({ data, isLoading }) => {
 
   let products = data?.map((product) => (
     <div className="products__card" key={product.id}>
-      <div className="products__card__img"></div>
+      <div className="products__card__img">
+        <img src={product.url} alt={product.title} />
+      </div>
       <div className="products__card__info">
         <h3>{product.title}</h3>
         <p>{product.category}</p>
