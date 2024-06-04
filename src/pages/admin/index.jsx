@@ -1,11 +1,15 @@
 import React, { memo } from "react";
 import { Outlet } from "react-router-dom";
+import SideBar from "./side-bar";
+
+import "./admin.scss";
 
 const Admin = () => {
   return (
-    <div>
+    <section className="admin">
+      <SideBar />
       <Outlet />
-    </div>
+    </section>
   );
 };
 

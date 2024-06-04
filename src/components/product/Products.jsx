@@ -2,10 +2,12 @@ import React, { memo } from "react";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 
 import "./products.scss";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addWishlist } from "../../context/slice/wishlistSlice";
 
 const Products = ({ data, isLoading }) => {
   const dispatch = useDispatch();
+  let wishlistData = useSelector((state) => state.wishlistSlice.data);
 
   if (isLoading) {
     return <div className="loading">Loading...</div>;
@@ -18,8 +20,15 @@ const Products = ({ data, isLoading }) => {
         <h3>{product.title}</h3>
         <p>{product.category}</p>
         <p>${product.price}</p>
-        <button className="products__card__heart-btn">
-          <FaRegHeart />
+        <button
+          onClick={() => dispatch(addWishlist(product))}
+          className="products__card__heart-btn"
+        >
+          {wishlistData.some((el) => el.id === product.id) ? (
+            <FaHeart color="crimson" />
+          ) : (
+            <FaRegHeart />
+          )}
         </button>
       </div>
     </div>

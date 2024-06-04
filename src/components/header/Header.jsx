@@ -2,11 +2,14 @@ import React, { memo } from "react";
 
 import "./header.scss";
 import { NavLink, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   let { pathname } = useLocation();
+  let wishlistData = useSelector((state) => state.wishlistSlice.data);
 
   if (pathname === "/admin/create-product") return;
+  if (pathname === "/admin/manage-product") return;
 
   return (
     <header className="header">
@@ -23,6 +26,7 @@ const Header = () => {
           <li className="header__item">
             <NavLink to={"/wishlist"} className={"header__link"}>
               Wishlist
+              {wishlistData.length ? <sup>{wishlistData.length}</sup> : <></>}
             </NavLink>
           </li>
           <li className="header__item">
