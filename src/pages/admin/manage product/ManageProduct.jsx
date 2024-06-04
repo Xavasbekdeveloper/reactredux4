@@ -1,5 +1,8 @@
 import React, { memo } from "react";
-import { useGetProductsQuery } from "../../../context/api/peoductsApi";
+import {
+  useGetProductsQuery,
+  useDeleteProductMutation,
+} from "../../../context/api/peoductsApi";
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
@@ -7,10 +10,15 @@ import "./manageProduct.scss";
 
 const ManageProduct = () => {
   const { data, isLoading } = useGetProductsQuery();
+  const [deleteProduct] = useDeleteProductMutation();
+
+  console.log(deleteProduct);
 
   let products = data?.map((product) => (
     <div className="manage__card" key={product.id}>
-      <div className="manage__card__img"></div>
+      <div className="manage__card__img">
+        <img src={product.url} alt={product.title} />
+      </div>
       <div className="manage__card__info">
         <h3>{product.title}</h3>
         <p>{product.category}</p>
@@ -19,7 +27,7 @@ const ManageProduct = () => {
           <button>
             <CiEdit />
           </button>
-          <button>
+          <button onClick={() => deleteProduct(product.id)}>
             <RiDeleteBin6Line />
           </button>
         </div>

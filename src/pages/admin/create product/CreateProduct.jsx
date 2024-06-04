@@ -1,27 +1,32 @@
 import React, { memo, useState } from "react";
 
 import "./createProduct.scss";
-// import {
-//   useCreateProductMutation,
-//   useGetPostQuery,
-// } from "../../../context/api/peoductsApi";
+import { useCreateProductMutation } from "../../../context/api/peoductsApi";
+import { useNavigate } from "react-router-dom";
 
 const CreateProduct = () => {
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
   const [image, setImage] = useState(
-    "'https://m.media-amazon.com/images/I/51hqXIAVXAL._AC_UF1000,1000_QL80_.jpg"
+    "https://m.media-amazon.com/images/I/51hqXIAVXAL._AC_UF1000,1000_QL80_.jpg"
   );
 
-  const handleCreate = (e) => {
+  const navigate = useNavigate();
+
+  const [createProduct] = useCreateProductMutation();
+
+  const handleCreate = async (e) => {
     e.preventDefault();
     let newProduct = {
       title: name,
       category,
-      price,
+      price: +price,
       url: image,
     };
+
+    await createProduct(newProduct);
+    navigate("/admin/manage-product");
 
     setName("");
     setCategory("");
